@@ -1,0 +1,41 @@
+name: quality-gate
+
+on:
+  push:
+    branches:
+      - main
+      - dev/**
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      - name: Format check
+        run: test -z "$(gofmt -l cmd internal)"
+      - name: Static analysis
+        run: go vet ./...
+      - name: Unit and integration tests
+        run: go test -count=1 ./...
+      - name: Race detection
+        run: go test -race -count=1 ./...
+      - name: Coverage threshold
+        run: |
+          go test -count=1 -coverpkg=./... -coverprofile=coverage.out ./...
+          total="$(go tool cover -func=coverage.out | awk '/^total:/{gsub(/%/, "", $3); print $3}')"
+          awk -v total="$total" 'BEGIN { exit !(total >= 85) }'
+      - name: Upload coverage profile
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-profile
+          path: coverage.out
+          if-no-files-found: error

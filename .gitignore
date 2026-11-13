@@ -1,0 +1,11 @@
+*.db
+*.db-shm
+*.db-wal
+coverage
+coverage-*
+coverage.out
+coverage.html
+winget.stdout
+winget.stderr
+/shop
+

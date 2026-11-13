@@ -1,0 +1,15 @@
+.git
+.github
+*.db
+*.db-shm
+*.db-wal
+coverage
+coverage-*
+coverage.out
+coverage.html
+data
+docs
+scripts
+testdata
+winget.stdout
+winget.stderr
