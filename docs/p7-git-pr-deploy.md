@@ -27,7 +27,7 @@ docker run --rm -p 8080:8080 -v "${PWD}/data:/data" -e SHOP_COOKIE_SECRET="请�
 
 | 项目 | 状态 | 证据或阻塞 |
 | --- | --- | --- |
-| Git 本地提交 | 待执行 | 当前分支尚无提交；当前 Git 配置为 `rainz <you@example.com>`，提交将沿用该本机已有身份。 |
+| Git 本地提交 | 已完成 | `daabbd7a feat(transaction): 完成交易系统交付`，当前 Git 配置为 `rainz <you@example.com>`。 |
 | GitHub 推送与 PR | 无法执行 | 终端无法连接 `github.com:443`，且本机没有 `gh`。未强推或覆盖远程分支。 |
 | GitHub Actions 执行 | 待推送后触发 | 工作流已就绪，当前无法推送触发。 |
 | Docker 容器构建/运行 | 无法执行 | Docker CLI 已安装，但 Docker Desktop 守护进程启动 60 秒后仍未就绪；系统 WSL 服务此前返回访问被拒绝。 |
